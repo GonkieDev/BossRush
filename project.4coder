@@ -1,0 +1,186 @@
+version(1);
+
+project_name = "Programming Game";
+
+patterns =
+{
+    "*.c",
+    "*.cpp",
+    "*.h",
+    "*.hpp",
+    "*.bat",
+    "*.sh",
+    "*.4coder",
+    "*.txt",
+    "*.glsl",
+    "*.vert",
+    "*.frag",
+    "*.mdesk",
+};
+
+blacklist_patterns =
+{
+    ".*",
+    "build/*",
+    "bin/*",
+    "*stb*",
+    "meow_hash_x64_*",
+    "*generated*",
+};
+
+load_paths =
+{
+    {
+        { {"."}, .recursive = true, .relative = true }, .os = "win"
+    },
+};
+
+command_list =
+{
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    //~ Build
+    
+    {
+        .name = "Compile Game - DEBUG",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = true,
+        .cursor_at_end = true,
+        .cmd =
+        {
+            { "pushd tools\build && .\build_all.exe && popd", .os = "win" },
+            { "echo Linux build command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+    {
+        .name = "Compile Game - DEBUG (quick)",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = true,
+        .cursor_at_end = true,
+        .cmd =
+        {
+            { "pushd tools\build &&  .\build_all.exe not_full && popd", .os = "win" },
+            { "echo Linux build command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+    {
+        .name = "Compile Game - RELEASE",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = true,
+        .cursor_at_end = true,
+        .cmd =
+        {
+            { "pushd tools\build && .\build_all.exe release && popd", .os = "win" },
+            { "echo Linux build command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+    {
+        .name = "Compile Build System",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = true,
+        .cursor_at_end = true,
+        .cmd =
+        {
+            { "pushd tools\build &&  cl .\build_all.c /FC && popd", .os = "win" },
+            { "echo Linux build command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    //~ Run
+    {
+        .name = "Run Game - DEBUG",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = true,
+        .cursor_at_end = false,
+        .cmd =
+        {
+            { "remedybg.exe -g -q tools\game.rdbg", .os = "win" },
+            { "echo Linux build command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+    {
+        .name = "Run Game - RELEASE",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = true,
+        .cursor_at_end = false,
+        .cmd =
+        {
+            { "pushd bin\win32\release && .\game.exe && popd", .os = "win" },
+            { "echo Linux build command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    //~ Misc
+    
+    {
+        .name = "open file explorer",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = true,
+        .cursor_at_end = false,
+        .cmd =
+        {
+            { "explorer.exe .", .os = "win" },
+            { "echo Linux run command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+    {
+        .name = "delete build folder",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = false,
+        .cursor_at_end = true,
+        .cmd =
+        {
+            { "del /f /s /q bin 1>nul && rmdir /s /q bin", .os = "win" },
+            { "echo Linux run command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+    {
+        .name = "debugger",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = true,
+        .cursor_at_end = false,
+        .cmd =
+        {
+            { "remedybg.exe tools\game.rdbg", .os = "win" },
+            { "echo Linux command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+    {
+        .name = "ezm open debugger",
+        .out = "*compilation*",
+        .footer_panel = true,
+        .save_dirty_files = true,
+        .cursor_at_end = false,
+        .cmd =
+        {
+            { "remedybg.exe tools\ezm\ezm_debug_session.rdbg", .os = "win" },
+            { "echo Linux command not implemented for 4coder project.", .os = "linux" },
+        },
+    },
+    
+};
+
+fkey_command[1] = "Run Game - DEBUG";
+fkey_command[3] = "Run Game - RELEASE";
+fkey_command[5] = "Compile Game - DEBUG";
+fkey_command[8] = "Compile Game - DEBUG (quick)";
+
+fkey_command[10] = "Compile Game - RELEASE";

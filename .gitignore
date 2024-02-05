@@ -1,0 +1,9 @@
+bin
+*.obj
+*.dll
+*.rdbg
+*.cap
+*.exe
+*.pdb
+*.map
+*.ilk
